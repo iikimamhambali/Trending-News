@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="server_url">https://api.nytimes.com/svc</string>
+    <string name="api_key">JE18uyc1nlwv5D6SQcbROl6QCZayp6TE</string>
+</resources>
