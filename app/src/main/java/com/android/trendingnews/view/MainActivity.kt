@@ -1,7 +1,8 @@
-package com.android.trendingnews
+package com.android.trendingnews.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.android.trendingnews.R
 
 class MainActivity : AppCompatActivity() {
 
