@@ -1,13 +1,28 @@
 package com.android.trendingnews.view
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.android.trendingnews.R
+import com.android.trendingnews.base.BaseActivity
+import org.jetbrains.anko.toast
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    private val viewModel by viewModel<NewsViewModel>()
+
+    override fun getLayoutResId(): Int = R.layout.activity_main
+
+    override fun loadingData(isFromSwipe: Boolean) {
+        super.loadingData(isFromSwipe)
+        viewModel.getNewsPopular(getString(R.string.api_key))
+    }
+
+    override fun observeData() {
+        super.observeData()
+        viewModel.newsPopular.observe(this, Observer {
+            parseObserveData(it, resultSuccess = { result, pagination ->
+                toast("Success")
+            })
+        })
     }
 }

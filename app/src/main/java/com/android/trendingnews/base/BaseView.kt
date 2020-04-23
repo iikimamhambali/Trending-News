@@ -32,8 +32,6 @@ interface BaseView {
 
     fun onDataNotFound()
 
-    fun onUnAuthorization()
-
     fun onError(throwable: Throwable? = null)
 
     fun <T> parseObserveData(
@@ -42,7 +40,6 @@ interface BaseView {
         resultSuccess: (T, T) -> Unit = { _, _ -> },
         resultNetworkFailed: (Throwable?) -> Unit = { onInternetError() },
         resultDataNotFound: (Throwable?) -> Unit = { onDataNotFound() },
-        resultAuthorization: (Throwable?) -> Unit = { onUnAuthorization() },
         resultError: (Throwable?) -> Unit = { onError(it) }
     ) {
         when (resource.status) {
@@ -60,10 +57,6 @@ interface BaseView {
             StatusState.NotFound -> {
                 stopLoading()
                 resultDataNotFound(resource.throwable)
-            }
-            StatusState.Unauthorized -> {
-                stopLoading()
-                resultAuthorization(resource.throwable)
             }
             StatusState.UnknownError -> {
                 stopLoading()
